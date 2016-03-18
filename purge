@@ -6,6 +6,6 @@ cleanup () {
   exit $EXIT
 }
 
-[ -n "${1:-}" ] && PATERNE=$1 || cleanup 1 "Missing paterne"
-git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $PATERNE" --prune-empty --tag-name-filter cat -- --all
+[ -n "${1:-}" ] && PATTERN=$1 || cleanup 1 "Missing pattern"
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $PATTERN" --prune-empty --tag-name-filter cat -- --all
 git push --force --all

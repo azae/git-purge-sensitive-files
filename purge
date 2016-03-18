@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cleanup () {
+  [ -n "${1:-}" ] && EXIT="${1}" || EXIT=0
+  [ -n "${2:-}" ] && echo "$2" >&2
+  exit $EXIT
+}
+
+[ -n "${1:-}" ] && PATERNE=$1 || cleanup 1 "Missing paterne"
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $PATERNE" --prune-empty --tag-name-filter cat -- --all
+git push --force --all
